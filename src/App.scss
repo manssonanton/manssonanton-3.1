@@ -1,0 +1,227 @@
+.navbar {
+    width: 96%;
+    margin: 0 auto;
+    padding: 1rem;
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .name-link {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #2c2c2c;
+            letter-spacing: 0.6rem;
+        }
+
+        .navbar-link {
+            margin-left: 1.8rem;
+            padding: 0.7rem;
+            color: #000000;
+            font-weight: 400;
+            font-size: 0.85rem;
+            border: none;
+            background-color: transparent;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.home {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    h1 {
+        font-size: 5rem;
+        font-weight: 800;
+        color: #272727;
+        
+    }
+}
+
+.dashboard {
+    width: 90%;
+    margin: 0 auto;
+    height: 90vh;
+
+    .dashboard-container {
+        min-height: 80%;
+        display: flex;
+        justify-content: space-evenly;
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #383838;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .user-info {
+            width: 50%;
+        }
+
+        .user-images {
+            width: 50%;
+
+            img {
+                width: 100%;
+                display: block;
+                &:hover{
+                    cursor: zoom-in;
+                }
+            }
+
+            .user-images-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                button {
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    border: 1px solid rgba(0, 0, 0, 0.219);
+                    padding: 0.7rem;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+
+}
+
+.signUpIn {
+    margin: 0 auto;
+    height: 90vh;
+
+    .signUpIn-container {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        form {
+            width: 30%;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 0.2rem;
+            color: #1b1b1b;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-bottom: solid rgba(0, 0, 0, 0.096) 1px;
+            margin-bottom: 1.8rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        a {
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: block;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            color: #1b1b1b;
+        }
+
+        button {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            color: #1b1b1b;
+            width: 200px;
+            margin: 0 auto;
+            display: block;
+            background-color: transparent;
+            border: solid 1px rgba(209, 209, 209, 0.363);
+            border-radius: 5px;
+            margin-top: 1rem;
+            padding: 0.8rem;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.Upload-images-form {
+    // width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+        background-color: rgba(204, 204, 204, 0.397);
+        padding: 0.7rem;
+        margin: 1rem;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        display: inline-block;
+    }
+
+    .pick-images {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            margin: 1rem;
+
+            p {
+                margin: 0;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+        }
+
+        progress {
+            width: 100%;
+        }
+    }
+}
+
+.Portfolio {
+    width: 90%;
+    margin: 0 auto;
+    height: 90vh;
+
+    .Portfolio-container {
+        
+        img {
+            width: 100%;
+            display: block;
+        &:hover{
+            cursor: zoom-in;
+        }
+        }
+    }
+}
