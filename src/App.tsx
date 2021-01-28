@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import './App.scss';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import Header from './Components/UI/Header';
 import SignUp from './Components/Pages/SignUp';
@@ -48,10 +48,30 @@ function App() {
     return <Loader />
   }
 
+  const containerVariants = {
+    hidden: {
+        // opacity: 0,
+        x: '100vw',
+    },
+    visible: {
+        // opacity: 1,
+        x: '0vw',
+        transition: { ease: 'easeInOut', delay: 0.2, duration: 0.5 }
+    },
+    exit: {
+        x: '-100vw',
+        transition: { ease: 'easeInOut', delay: 0.5, duration: 0.5 }
+    }
+}
+
   return (
-    <>
-      <Header />
-      <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter initial={false}>
+      <motion.div className=""
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit">
+        <Header />
         <Switch location={location} key={location.key}>
           <Route path="/" component={Home} exact />
           <PublicRoute path="/signup" component={SignUp} exact />
@@ -61,8 +81,8 @@ function App() {
           <PublicRoute path="/forgot-password" component={ForgorPassword} exact />
           <PrivateRoute path="/dashboard" component={Dashboard} exact />
         </Switch>
-      </AnimatePresence>
-    </>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
