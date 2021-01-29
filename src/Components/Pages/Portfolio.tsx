@@ -38,11 +38,6 @@ function Portfolio() {
     }
 
     return (
-        <motion.div className=""
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit">
             <section className="Portfolio">
                 <div className="Portfolio-container">
                     {!imagesLoaded
@@ -64,7 +59,6 @@ function Portfolio() {
                     {imageUrl && <ImageModal url={imageUrl} onClose={() => setImageUrl('')} />}
                 </div>
             </section>
-        </motion.div>
     )
 }
 

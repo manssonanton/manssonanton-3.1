@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import React, { Dispatch, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,11 +7,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store';
 import { signOut } from '../../Store/actions/authActions';
 import Button from '../UI/Button';
+import { SetStateAction } from 'react-dom/node_modules/@types/react';
+import Panels from '../UI/Panels';
 interface MenuProps {
-    onClose: () => void;
+
+    setMenuState: Dispatch<SetStateAction<boolean>>;
+    menuState: boolean;
 }
 
-function Menu({ onClose }: MenuProps) {
+function Menu({ menuState, setMenuState }: MenuProps) {
 
     const dispatch = useDispatch();
     const { authenticated } = useSelector((state: RootState) => state.auth);
@@ -21,63 +25,118 @@ function Menu({ onClose }: MenuProps) {
         dispatch(signOut());
     }
 
-    const containerVariants = {
-        hidden: {
-            // opacity: 0,
-            y: '100vw',
-        },
-        visible: {
-            // opacity: 1,
-            y: '0vw',
-            transition: { ease: 'easeInOut', delay: 0.2, duration: 0.5 }
-        },
-        exit: {
-            y: '-100vw',
-            transition: { ease: 'easeInOut', delay: 0.5, duration: 0.5 }
+    const transition = { duration: .8, ease: [0.6, -0.05, 0.01, 0.9] }
+
+    const titleSlideUp = {
+        initial: { y: -200, opacity: 0 },
+        animate: { y: 0, opacity: 1 },
+        exit: { y: -200, opacity: 0 },
+    }
+
+    const titleSlideDown = {
+        initial: { y: 200, opacity: 0 },
+        animate: { y: 0, opacity: 1 },
+        exit: { y: 200, opacity: 0 },
+    }
+
+    const parent = {
+        animate: {
+            transition: {
+                staggerChildren: 0.05,
+                delayChildren: 1,
+            }
         }
     }
 
     return (
-        // <motion.div className=""
-        //     variants={containerVariants}
-        //     initial="hidden"
-        //     animate="visible"
-        //     exit="exit">
-        <section className="menu">
-            <div className="menu-container">
-                <Button className="navbar-link" text="close" onClick={onClose} />
-                <nav className="menu-nav">
-                    <ul>
-                        <li>
-                            <Link to="/" className="navbar-link" onClick={onClose}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/portfolio" className="navbar-link" onClick={onClose}>Portfolio</Link>
-                        </li>
-                        <li>
-                            <Link to="/about" className="navbar-link" onClick={onClose}>About</Link>
-                        </li>
+        <AnimatePresence exitBeforeEnter>
+            {menuState &&
+                <>
+                    <motion.div
+                        initial={{ visibility: 'hidden' }}
+                        animate={{ visibility: 'visible', transition: { delay: 1 } }}
+                        exit={{ visibility: 'hidden', transition: { delay: 1 } }}
+                        className="menu">
+                        <div className="menu-container">
+                            <div className="menu-header">
+                            <Button className="menu-close-button" text="Close" onClick={() => setMenuState(false)} />
+                            </div>
+                            <nav className="menu-nav">
+                                <motion.ul
+                                    variants={parent}
+                                    initial='initial'
+                                    animate='animate'
+                                    exit='exit'>
+                                    <li>
+                                        <Link to="/" className="navbar-link" >
+                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                Ho
+                                            </motion.div>
+                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                me
+                                            </motion.div>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/Portfolio" className="navbar-link" >
+                                        <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                Port
+                                            </motion.div>
+                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                folio
+                                            </motion.div>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/about" className="navbar-link" >
+                                        <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                Abo
+                                            </motion.div>
+                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                ut
+                                            </motion.div>
+                                        </Link>
+                                    </li>
 
-                        {!authenticated ?
-                            <>
-                                <li>
-                                    <Link to="/signin" className="navbar-link" onClick={onClose}>Sign in</Link>
-                                </li>
-                            </>
-                            :
-                            <>
-                                <li>
-                                    <Link to="/dashboard" className="navbar-link" onClick={onClose}>Dashboard </Link>
-                                </li>
-
-                                {/* <Button className="navbar-link" text="Sign Out" onClick={logOutHandler} /> */}
-                            </>
-                        }
-                    </ul>
-                </nav>
-            </div>
-        </section>
-        // </motion.div>
+                                    {!authenticated ?
+                                        <>
+                                            <li>
+                                                <Link to="/signin" className="navbar-link">Sign in</Link>
+                                            </li>
+                                        </>
+                                        :
+                                        <>
+                                            <li>
+                                                <Link to="/dashboard" className="navbar-link" >
+                                                <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                Dash
+                                            </motion.div>
+                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                board
+                                            </motion.div>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/" className="navbar-link" onClick={logOutHandler}>
+                                                <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                Sign 
+                                            </motion.div>
+                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                Out
+                                            </motion.div>
+                                                </Link>
+                                            </li>
+                                            
+                                        </>
+                                    }
+                                </motion.ul>
+                            </nav>
+                        </div>
+                    </motion.div>
+                    <Panels />
+                </>
+            }
+        </AnimatePresence>
     )
 }
 
