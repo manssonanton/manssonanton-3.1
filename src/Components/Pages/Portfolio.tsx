@@ -8,7 +8,7 @@ import { RootState } from '../../Store';
 import { getImages } from '../../Store/actions/galleryActions';
 import { GalleryImage } from '../../Store/Types/galleryTypes';
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Portfolio() {
     const { images, imagesLoaded } = useSelector((state: RootState) => state.gallery);
@@ -38,27 +38,35 @@ function Portfolio() {
     }
 
     return (
-            <section className="Portfolio">
-                <div className="Portfolio-container">
-                    {!imagesLoaded
-                        ? <Message type="info" msg="Loading images..." />
-                        : images.length === 0 ?
-                            <Message type="info" msg="There are no images" />
-                            : <>
-                                <ResponsiveMasonry
-                                    columnsCountBreakPoints={{ 350: 1, 1000: 2, 1930: 3 }}
-                                >
-                                    <Masonry columnsCount={3} gutter="1rem">
-                                        {images.map((image: GalleryImage) => (
-                                            <img key={image.id} src={image.imageUrl} onClick={() => setImageUrl(image.imageUrl)} alt="" />
-                                        ))}
-                                    </Masonry>
-                                </ResponsiveMasonry>
-                            </>
-                    }
-                    {imageUrl && <ImageModal url={imageUrl} onClose={() => setImageUrl('')} />}
-                </div>
-            </section>
+        <AnimatePresence>
+            <motion.div
+                initial={{ visibility: 'hidden' }}
+                animate={{ visibility: 'visible', transition: { delay: 1 } }}
+                exit={{ visibility: 'hidden', transition: { delay: 1 } }}
+                className="">
+                <section className="Portfolio">
+                    <div className="Portfolio-container">
+                        {!imagesLoaded
+                            ? <Message type="info" msg="Loading images..." />
+                            : images.length === 0 ?
+                                <Message type="info" msg="There are no images" />
+                                : <>
+                                    <ResponsiveMasonry
+                                        columnsCountBreakPoints={{ 350: 1, 1000: 2, 1930: 3 }}
+                                    >
+                                        <Masonry columnsCount={3} gutter="1rem">
+                                            {images.map((image: GalleryImage) => (
+                                                <img key={image.id} src={image.imageUrl} onClick={() => setImageUrl(image.imageUrl)} alt="" />
+                                            ))}
+                                        </Masonry>
+                                    </ResponsiveMasonry>
+                                </>
+                        }
+                        {imageUrl && <ImageModal url={imageUrl} onClose={() => setImageUrl('')} />}
+                    </div>
+                </section>
+            </motion.div>
+        </AnimatePresence>
     )
 }
 

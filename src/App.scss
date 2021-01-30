@@ -311,5 +311,21 @@
 .right-panel{
     right: 0;
     background-color: rgb(43, 43, 43);
-    border-left: 1px white solid;
+    // border-left: 1px white solid;
+}
+
+.cursor{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background-color: black;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-in-out;
+    transition-property: width, height, border;
+    will-change: width, height, border;
+    pointer-events: none;
+    z-index: 99;
 }

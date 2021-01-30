@@ -1,14 +1,21 @@
 * {
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    color: #000000;
+
     -ms-overflow-style: none;
     scrollbar-width: none;
+    cursor: none;
 }
 
+html{
+    box-sizing: border-box;
+    -webkit-font-smoothing: antiialiased;
+    font-size: 16;
+}
 body {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
+    overflow-x: hidden;
   }
 
 a {

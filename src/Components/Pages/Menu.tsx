@@ -25,16 +25,16 @@ function Menu({ menuState, setMenuState }: MenuProps) {
         dispatch(signOut());
     }
 
-    const transition = { duration: .8, ease: [0.6, -0.05, 0.01, 0.9] }
+    const transition = { duration: .7, ease: [0.6, -0.05, 0.01, 0.9] }
 
     const titleSlideUp = {
-        initial: { y: -200, opacity: 0 },
+        initial: { y: -100, opacity: 0 },
         animate: { y: 0, opacity: 1 },
         exit: { y: -200, opacity: 0 },
     }
 
     const titleSlideDown = {
-        initial: { y: 200, opacity: 0 },
+        initial: { y: 100, opacity: 0 },
         animate: { y: 0, opacity: 1 },
         exit: { y: 200, opacity: 0 },
     }
@@ -49,7 +49,7 @@ function Menu({ menuState, setMenuState }: MenuProps) {
     }
 
     return (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
             {menuState &&
                 <>
                     <motion.div

@@ -18,6 +18,7 @@ import { RootState } from './Store';
 import About from './Components/Pages/About';
 import Gallery from './Components/Pages/Portfolio';
 import Menu from './Components/Pages/Menu';
+import Cursor from './Components/UI/Cursor';
 
 
 function App() {
@@ -39,11 +40,13 @@ function App() {
       }
       dispatch(setLoading(false));
     });
+    
 
     return () => {
       unsubscribe();
     }
   }, [dispatch]);
+
 
   if (loading) {
     return <Loader />
@@ -51,6 +54,7 @@ function App() {
 
   return (
     <>
+      <Cursor />
       <Menu menuState={menuState} setMenuState={setMenuState} />
       <Header setMenuState={setMenuState} />
       <Switch location={location} key={location.key}>

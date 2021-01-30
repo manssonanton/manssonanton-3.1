@@ -1,28 +1,15 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux'
-// import { Link } from 'react-router-dom';
-
-// import ImageModal from '../UI/ImageModal';
-// import { RootState } from '../../Store';
-// import { getImages } from '../../Store/actions/galleryActions';
 
 function Home() {
-    // const { imagesLoaded } = useSelector((state: RootState) => state.gallery);
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     if (!imagesLoaded) {
-    //         dispatch(getImages());
-    //     }
-    // }, []);
-
 
     return (
         <section className="home">
             <div className="home-container">
-                <h1>WELCOME TO THE GALLERY</h1>
-                Upload some photos that you like
+                <div className="front">
+                    <div>Artivcel</div>
+                    <img className="front-image" src="https://images.unsplash.com/photo-1603993097397-89c963e325c7?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="" />
+                </div>
             </div>
         </section>
     )
