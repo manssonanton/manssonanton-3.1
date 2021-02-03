@@ -19,29 +19,27 @@ import About from './Components/Pages/About';
 import Gallery from './Components/Pages/Portfolio';
 import Menu from './Components/Pages/Menu';
 import Cursor from './Components/UI/Cursor';
+import { toggleCursor } from './Store/actions/themeActions';
 
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { loading } = useSelector((state: RootState) => state.auth)
+  const { loading } = useSelector((state: RootState) => state.auth);
   const [menuState, setMenuState] = useState(false);
 
   useEffect(() => {
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        // dispatch(setLoading(true));
-        await dispatch(getUserById(user.uid));
+        dispatch(getUserById(user.uid));
 
         if (!user.emailVerified) {
-          await dispatch(setNeedVerification());
+          dispatch(setNeedVerification());
         }
       }
-      dispatch(setLoading(false));
+      // dispatch(setLoading(false));
     });
-    
-
     return () => {
       unsubscribe();
     }
@@ -52,11 +50,15 @@ function App() {
     return <Loader />
   }
 
+  const onHover = (hover: string) => {
+    dispatch(toggleCursor(hover));
+  }
+
   return (
     <>
       <Cursor />
-      <Menu menuState={menuState} setMenuState={setMenuState} />
-      <Header setMenuState={setMenuState} />
+      <Menu menuState={menuState} setMenuState={setMenuState} onHover={onHover} />
+      <Header setMenuState={setMenuState} onHover={onHover} />
       <Switch location={location} key={location.key}>
         <Route path="/" component={Home} exact />
         <PublicRoute path="/signup" component={SignUp} exact />

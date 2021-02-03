@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,13 +9,14 @@ import { signOut } from '../../Store/actions/authActions';
 import Button from '../UI/Button';
 import { SetStateAction } from 'react-dom/node_modules/@types/react';
 import Panels from '../UI/Panels';
-interface MenuProps {
 
+interface MenuProps {
     setMenuState: Dispatch<SetStateAction<boolean>>;
     menuState: boolean;
+    onHover: (hover: string) => void;
 }
 
-function Menu({ menuState, setMenuState }: MenuProps) {
+function Menu({ menuState, setMenuState, onHover }: MenuProps) {
 
     const dispatch = useDispatch();
     const { authenticated } = useSelector((state: RootState) => state.auth);
@@ -59,7 +60,7 @@ function Menu({ menuState, setMenuState }: MenuProps) {
                         className="menu">
                         <div className="menu-container">
                             <div className="menu-header">
-                            <Button className="menu-close-button" text="Close" onClick={() => setMenuState(false)} />
+                                <Button className="menu-close-button" text="Close" onClick={() => setMenuState(false)} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")} />
                             </div>
                             <nav className="menu-nav">
                                 <motion.ul
@@ -68,7 +69,7 @@ function Menu({ menuState, setMenuState }: MenuProps) {
                                     animate='animate'
                                     exit='exit'>
                                     <li>
-                                        <Link to="/" className="navbar-link" >
+                                        <Link to="/" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                             <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
                                                 Ho
                                             </motion.div>
@@ -78,8 +79,8 @@ function Menu({ menuState, setMenuState }: MenuProps) {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/Portfolio" className="navbar-link" >
-                                        <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                        <Link to="/Portfolio" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
                                                 Port
                                             </motion.div>
                                             <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
@@ -88,8 +89,8 @@ function Menu({ menuState, setMenuState }: MenuProps) {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/about" className="navbar-link" >
-                                        <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                        <Link to="/about" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
                                                 Abo
                                             </motion.div>
                                             <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
@@ -101,32 +102,39 @@ function Menu({ menuState, setMenuState }: MenuProps) {
                                     {!authenticated ?
                                         <>
                                             <li>
-                                                <Link to="/signin" className="navbar-link">Sign in</Link>
+                                                <Link to="/signin" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                    <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                        Sign
+                                            </motion.div>
+                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                        in
+                                            </motion.div>
+                                                </Link>
                                             </li>
                                         </>
                                         :
                                         <>
                                             <li>
-                                                <Link to="/dashboard" className="navbar-link" >
-                                                <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                Dash
+                                                <Link to="/dashboard" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                    <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                        Dash
                                             </motion.div>
-                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                board
+                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                        board
                                             </motion.div>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/" className="navbar-link" onClick={logOutHandler}>
-                                                <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                Sign 
+                                                <Link to="/" className="navbar-link" onClick={logOutHandler} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                    <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                        Sign
                                             </motion.div>
-                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                Out
+                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
+                                                        Out
                                             </motion.div>
                                                 </Link>
                                             </li>
-                                            
+
                                         </>
                                     }
                                 </motion.ul>
