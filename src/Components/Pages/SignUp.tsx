@@ -2,9 +2,9 @@ import React, { useState, FormEvent, useEffect } from 'react';
 // import {useHistory, Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Button from '../UI/Button';
-import Input from '../UI/Input';
-import Message from '../UI/Message';
+import Button from '../Elements/Button';
+import Input from '../Elements/Input';
+import Message from '../Elements/Message';
 
 import { RootState } from '../../Store';
 import { signUp, setError, signUpWithGoogle } from '../../Store/actions/authActions';

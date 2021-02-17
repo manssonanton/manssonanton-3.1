@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Message from '../UI/Message';
-import Button from '../UI/Button';
-import UploadImagesModal from '../UI/UploadImagesModal';
-import ImageModal from '../UI/ImageModal';
-import Card from '../UI/Card';
-import Alert from '../UI/Alert';
+import Message from '../Elements/Message';
+import Button from '../Elements/Button';
+import UploadImagesModal from '../Elements/UploadImagesModal';
+import ImageModal from '../Elements/ImageModal';
+import Card from '../Elements/Card';
+import Alert from '../Elements/Alert';
 
 import { RootState } from '../../Store';
 import { setSuccess } from '../../Store/actions/authActions';
 import { getImages, deleteImage } from '../../Store/actions/galleryActions';
 import { GalleryImage } from '../../Store/Types/galleryTypes';
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import { motion } from 'framer-motion';
 
 function Dashboard() {
     const { user, needVerification, success } = useSelector((state: RootState) => state.auth);
@@ -30,7 +29,7 @@ function Dashboard() {
         if (!imagesLoaded) {
             dispatch(getImages());
         }
-    }, []);
+    }, [dispatch, imagesLoaded]);
 
     useEffect(() => {
         if (images.length > 0) {

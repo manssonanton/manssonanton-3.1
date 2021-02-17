@@ -1,0 +1,49 @@
+.about {
+  font-family: "Crimson Pro", serif;
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  width: 100vw;
+  height: 100vh;
+  .left-grid {
+    margin-top: 8%;
+    p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.4;
+        width: 50%;
+      }
+      h1 {
+        font-family: "inter", sans-serif;
+        font-size: 10vw;
+        font-weight: 500;
+        padding: 0;
+        margin: 0;
+      }
+      h2 {
+        font-size: 5vw;
+        font-weight: 100;
+        padding: 0;
+        margin: 0;
+      }
+      h3 {
+        font-family: "inter", sans-serif;
+        font-size: 1.8vw;
+        font-weight: 900;
+        padding: 0;
+        margin: 0;
+        margin-top: 2%;
+      }
+    img {
+      max-height: 40vh;
+    }
+  }
+  .right-grid {
+    margin-top: 1%;
+    // width: 50%;
+    // height: 100vh;
+    img {
+    max-width: 42vw;
+    }
+  }
+}

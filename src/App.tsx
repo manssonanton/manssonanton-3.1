@@ -3,22 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import './App.scss';
 
-import Header from './Components/UI/Header';
+import Header from './Components/Elements/Header';
 import SignUp from './Components/Pages/SignUp';
 import SignIn from './Components/Pages/SignIn';
+import Articles from './Components/Pages/Articles';
 import ForgorPassword from './Components/Pages/ForgottPassword';
 import Home from './Components/Pages/Home';
 import Dashboard from './Components/Pages/Dashboard';
 import PrivateRoute from './Components/AuthRouting/PrivateRoute';
 import PublicRoute from './Components/AuthRouting/PublicRoute';
-import Loader from './Components/UI/Loader';
+import Loader from './Components/Elements/Loader';
 import firebase from './Firebase/config';
 import { getUserById, setLoading, setNeedVerification } from './Store/actions/authActions';
 import { RootState } from './Store';
-import About from './Components/Pages/About';
-import Gallery from './Components/Pages/Portfolio';
-import Menu from './Components/Pages/Menu';
-import Cursor from './Components/UI/Cursor';
+import About from './Components/Pages/About/About';
+import Gallery from './Components/Pages/Portfolio/Portfolio';
+import Menu from './Components/Pages/Menu/Menu';
+import Cursor from './Components/Elements/Cursor';
 import { toggleCursor } from './Store/actions/themeActions';
 
 
@@ -29,7 +30,7 @@ function App() {
   const [menuState, setMenuState] = useState(false);
 
   useEffect(() => {
-    // dispatch(setLoading(true));
+    dispatch(setLoading(true));
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         dispatch(getUserById(user.uid));
@@ -38,7 +39,7 @@ function App() {
           dispatch(setNeedVerification());
         }
       }
-      // dispatch(setLoading(false));
+      dispatch(setLoading(false));
     });
     return () => {
       unsubscribe();
@@ -57,17 +58,19 @@ function App() {
   return (
     <>
       <Cursor />
-      <Menu menuState={menuState} setMenuState={setMenuState} onHover={onHover} />
-      <Header setMenuState={setMenuState} onHover={onHover} />
-      <Switch location={location} key={location.key}>
-        <Route path="/" component={Home} exact />
-        <PublicRoute path="/signup" component={SignUp} exact />
-        <PublicRoute path="/signin" component={SignIn} exact />
-        <Route path="/about" component={About} exact />
-        <Route path="/portfolio" component={Gallery} exact />
-        <PublicRoute path="/forgot-password" component={ForgorPassword} exact />
-        <PrivateRoute path="/dashboard" component={Dashboard} exact />
-      </Switch>
+        {/* <Panels /> */}
+          <Menu menuState={menuState} setMenuState={setMenuState} onHover={onHover} />
+          <Header setMenuState={setMenuState} onHover={onHover} />
+          <Switch location={location} key={location.key}>
+            <Route path="/" component={Home} exact />
+            <PublicRoute path="/signup" component={SignUp} exact />
+            <PublicRoute path="/signin" component={SignIn} exact />
+            <Route path="/about" component={About} exact />
+            <Route path="/articles" component={Articles} exact />
+            <Route path="/portfolio" component={Gallery} exact />
+            <PublicRoute path="/forgot-password" component={ForgorPassword} exact />
+            <PrivateRoute path="/dashboard" component={Dashboard} exact />
+          </Switch>
     </>
   );
 }

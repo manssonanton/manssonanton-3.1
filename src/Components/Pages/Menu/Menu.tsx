@@ -1,14 +1,15 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { Dispatch } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../../Store';
-import { signOut } from '../../Store/actions/authActions';
-import Button from '../UI/Button';
+import { RootState } from '../../../Store';
+import { signOut } from '../../../Store/actions/authActions';
+import Button from '../../Elements/Button';
 import { SetStateAction } from 'react-dom/node_modules/@types/react';
-import Panels from '../UI/Panels';
+import Panels from '../../Elements/Panels';
+import './Menu.scss'
 
 interface MenuProps {
     setMenuState: Dispatch<SetStateAction<boolean>>;
@@ -59,9 +60,6 @@ function Menu({ menuState, setMenuState, onHover }: MenuProps) {
                         exit={{ visibility: 'hidden', transition: { delay: 1 } }}
                         className="menu">
                         <div className="menu-container">
-                            <div className="menu-header">
-                                <Button className="menu-close-button" text="Close" onClick={() => setMenuState(false)} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")} />
-                            </div>
                             <nav className="menu-nav">
                                 <motion.ul
                                     variants={parent}
@@ -69,76 +67,68 @@ function Menu({ menuState, setMenuState, onHover }: MenuProps) {
                                     animate='animate'
                                     exit='exit'>
                                     <li>
-                                        <Link to="/" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                        <NavLink activeClassName='is-active' exact to="/" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                             <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                Ho
+                                                home
                                             </motion.div>
-                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                me
-                                            </motion.div>
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link to="/Portfolio" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                        <NavLink activeClassName='is-active' to="/articles" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                             <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                Port
+                                                article
                                             </motion.div>
-                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                folio
-                                            </motion.div>
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link to="/about" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                        <NavLink activeClassName='is-active' to="/portfolio" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                             <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                Abo
+                                                portfolio
                                             </motion.div>
-                                            <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                ut
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink activeClassName='is-active' to="/about" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                                about
                                             </motion.div>
-                                        </Link>
+                                        </NavLink>
                                     </li>
 
-                                    {!authenticated ?
+                                    {/* {!authenticated ?
                                         <>
                                             <li>
-                                                <Link to="/signin" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                <NavLink activeClassName='is-active' to="/signin" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                                     <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                        Sign
-                                            </motion.div>
-                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                        in
-                                            </motion.div>
-                                                </Link>
+                                                        sign in
+                                                    </motion.div>
+                                                </NavLink>
                                             </li>
                                         </>
                                         :
                                         <>
                                             <li>
-                                                <Link to="/dashboard" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                <NavLink activeClassName='is-active' to="/dashboard" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                                     <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                        Dash
-                                            </motion.div>
-                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                        board
-                                            </motion.div>
-                                                </Link>
+                                                        dashboard
+                                                    </motion.div>
+                                                </NavLink>
                                             </li>
                                             <li>
-                                                <Link to="/" className="navbar-link" onClick={logOutHandler} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
+                                                <NavLink activeClassName='is-active' to="/" className="navbar-link" onClick={logOutHandler} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
                                                     <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
-                                                        Sign
-                                            </motion.div>
-                                                    <motion.div variants={titleSlideDown} transition={transition} className="menu-text">
-                                                        Out
-                                            </motion.div>
-                                                </Link>
+                                                        sign out
+                                                    </motion.div>
+                                                </NavLink>
                                             </li>
 
                                         </>
-                                    }
+                                    } */}
                                 </motion.ul>
                             </nav>
+                            <div className="menu-header">
+                                <Button className="menu-close-button" text="Close" onClick={() => setMenuState(false)} onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")} />
+                            </div>
                         </div>
                     </motion.div>
                     <Panels />
