@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import './About.scss';
 
 function About() {
@@ -23,6 +24,7 @@ function About() {
     }
 
     return (
+        <ScrollContainer className="scroll-container" horizontal={false} activationDistance={50} >
         <section className="about">
             <motion.div className="right-grid"
                             animate={{y: 0, opacity: 1}}
@@ -44,6 +46,7 @@ function About() {
                 </motion.p>
             </motion.div>
         </section>
+        </ScrollContainer>
     )
 }
 

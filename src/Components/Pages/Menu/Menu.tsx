@@ -19,24 +19,26 @@ interface MenuProps {
 
 function Menu({ menuState, setMenuState, onHover }: MenuProps) {
 
-    const dispatch = useDispatch();
-    const { authenticated } = useSelector((state: RootState) => state.auth);
+    // const dispatch = useDispatch();
+    // const { authenticated } = useSelector((state: RootState) => state.auth);
 
 
-    const logOutHandler = () => {
-        dispatch(signOut());
-    }
+    // const logOutHandler = () => {
+    //     dispatch(signOut());
+    // }
 
     const transition = { duration: .7, ease: [0.6, -0.05, 0.01, 0.9] }
 
+    const transition2 = { duration: 0.9, ease: [0.6, -0.05, 0.01, 0.9] }
+
     const titleSlideUp = {
-        initial: { y: -100, opacity: 0 },
+        initial: { y: 200, opacity: 0 },
         animate: { y: 0, opacity: 1 },
         exit: { y: -200, opacity: 0 },
     }
 
     const titleSlideDown = {
-        initial: { y: 100, opacity: 0 },
+        initial: { y: 200, opacity: 0 },
         animate: { y: 0, opacity: 1 },
         exit: { y: 200, opacity: 0 },
     }
@@ -44,7 +46,7 @@ function Menu({ menuState, setMenuState, onHover }: MenuProps) {
     const parent = {
         animate: {
             transition: {
-                staggerChildren: 0.05,
+                staggerChildren: 0.1,
                 delayChildren: 1,
             }
         }
@@ -68,28 +70,28 @@ function Menu({ menuState, setMenuState, onHover }: MenuProps) {
                                     exit='exit'>
                                     <li>
                                         <NavLink activeClassName='is-active' exact to="/" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
-                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                            <motion.div variants={titleSlideUp} transition={transition2} className="menu-text">
                                                 home
                                             </motion.div>
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink activeClassName='is-active' to="/articles" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
-                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                            <motion.div variants={titleSlideUp} transition={transition2} className="menu-text">
                                                 article
                                             </motion.div>
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink activeClassName='is-active' to="/portfolio" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
-                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                            <motion.div variants={titleSlideUp} transition={transition2} className="menu-text">
                                                 portfolio
                                             </motion.div>
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink activeClassName='is-active' to="/about" className="navbar-link" onMouseEnter={() => onHover("hovered")} onMouseLeave={() => onHover("")}>
-                                            <motion.div variants={titleSlideUp} transition={transition} className="menu-text">
+                                            <motion.div variants={titleSlideUp} transition={transition2} className="menu-text">
                                                 about
                                             </motion.div>
                                         </NavLink>
